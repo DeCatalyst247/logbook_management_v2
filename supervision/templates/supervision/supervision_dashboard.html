@@ -1,0 +1,82 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h2>Supervisor Dashboard</h2>
+<form method="GET">
+<input
+class="form-control mb-3"
+type="text"
+name ="q"
+placeholder="Search log title">
+
+</form>
+
+<form method="GET">
+
+    <input
+    type="text"
+    name="search"
+    class="form-control"
+    placeholder="Search student name">
+
+</form>
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>Student</th>
+    <th>Date</th>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for log in logs %}
+
+<tr>
+
+<td>{{ log.student.username }}</td>
+
+<td>{{ log.date }}</td>
+
+<td>{{ log.title }}</td>
+
+<td>
+
+{% if log.status == "approved" %}
+
+<span class="badge bg-success">
+Approved
+</span>
+
+{% elif log.status == "rejected" %}
+
+<span class="badge bg-danger">
+Rejected
+</span>
+
+{% else %}
+
+<span class="badge bg-warning text-dark">
+Pending
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+<a href="{% url 'review_log' log.id %}">
+Review
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

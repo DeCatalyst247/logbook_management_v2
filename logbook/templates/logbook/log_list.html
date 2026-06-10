@@ -1,0 +1,271 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-3">
+        My Logs
+    </h2>
+
+    <h4 class="text-success mb-4">
+        Total Logs: {{ total_my_logs }}
+    </h4>
+
+    <!-- SEARCH BOX -->
+
+    <form method="GET" class="mb-4">
+
+        <input
+        type="text"
+        name="search"
+        class="form-control"
+        placeholder="Search by title">
+
+    </form>
+
+    <form method="GET" class="mb-3">
+
+    <input
+    type="date"
+    name="date"
+    class="form-control">
+
+    <button
+    type="submit"
+    class="btn btn-primary mt-2">
+
+        Filter By Date
+
+    </button>
+
+</form>
+
+    <!-- LOG TABLE -->
+
+    <div class="mb-3">
+
+    <a class="btn btn-outline-dark btn-sm" href="?status=">
+        All
+    </a>
+
+    <a class="btn btn-outline-success btn-sm" href="?status=approved">
+        Approved
+    </a>
+
+    <a class="btn btn-outline-warning btn-sm" href="?status=pending">
+        Pending
+    </a>
+
+    <a class="btn btn-outline-danger btn-sm" href="?status=rejected">
+        Rejected
+    </a>
+
+</div>
+
+<a class="btn btn-success mb-3"
+   href="{% url 'export_pdf' %}">
+    Download PDF
+</a>
+    <table
+    class="table table-bordered table-striped table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>Date</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Supervisor Comment</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for log in logs %}
+
+            <tr>
+
+                <td>{{ log.date }}</td>
+
+                <td>{{ log.title }}</td>
+
+                <td>
+
+                    {% if log.status == "approved" %}
+
+                    <span class="badge bg-success">
+
+                        Approved
+
+                    </span>
+
+                    {% elif log.status == "rejected" %}
+
+                    <span class="badge bg-danger">
+
+                        Rejected
+
+                    </span>
+
+                    {% else %}
+
+                    <span class="badge bg-warning text-dark">
+
+                        Pending
+
+                    </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    {% if log.supervisor_comment %}
+
+                        {{ log.supervisor_comment }}
+
+                    {% else %}
+
+                        No comment yet
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <a
+                    class="btn btn-sm btn-success"
+                    href="{% url 'log_detail' log.pk %}">
+
+                        View
+
+                    </a>
+
+                    <a
+                    class="btn btn-sm btn-primary"
+                    href="{% url 'update_log' log.pk %}">
+
+                        Edit
+
+                    </a>
+
+                    <a
+                    class="btn btn-sm btn-danger"
+                    href="{% url 'delete_log' log.pk %}">
+
+                        Delete
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="5">
+
+                    No logs submitted yet.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <!-- PAGINATION -->
+
+    <hr>
+
+    <nav>
+
+        <ul class="pagination justify-content-center">
+
+            {% if page_obj.has_previous %}
+
+            <li class="page-item">
+
+                <a
+                class="page-link"
+                href="?page=1">
+
+                    First
+
+                </a>
+
+            </li>
+
+            <li class="page-item">
+
+                <a
+                class="page-link"
+                href="?page={{ page_obj.previous_page_number }}">
+
+                    Previous
+
+                </a>
+
+            </li>
+
+            {% endif %}
+
+            <li class="page-item active">
+
+                <span class="page-link">
+
+                    Page {{ page_obj.number }}
+                    of
+                    {{ page_obj.paginator.num_pages }}
+
+                </span>
+
+            </li>
+
+            {% if page_obj.has_next %}
+
+            <li class="page-item">
+
+                <a
+                class="page-link"
+                href="?page={{ page_obj.next_page_number }}">
+
+                    Next
+
+                </a>
+
+            </li>
+
+            <li class="page-item">
+
+                <a
+                class="page-link"
+                href="?page={{ page_obj.paginator.num_pages }}">
+
+                    Last
+
+                </a>
+
+            </li>
+
+            {% endif %}
+
+        </ul>
+
+    </nav>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,258 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-7 text-white">
+
+                <span class="badge bg-light text-success p-2 mb-3">
+                    Smart • Secure • Efficient
+                </span>
+
+                <h1 style="
+                font-size:5rem;
+                font-weight:900;
+                line-height:1.1;
+                ">
+
+                    IT Logbook<br>
+                    Management System
+
+                </h1>
+
+                <p class="lead mt-4">
+
+                    A modern platform for students,
+                    supervisors and institutions to
+                    manage Industrial Training and
+                    SIWES activities digitally.
+
+                </p>
+
+                <div class="mt-4">
+
+                    <a href="{% url 'log_list' %}"
+                    class="btn btn-light btn-lg px-4 py-3 me-3 fw-bold">
+
+                        View My Logs
+
+                    </a>
+
+                    <a href="{% url 'supervisor_dashboard' %}"
+                    class="btn btn-outline-light btn-lg px-4 py-3 fw-bold">
+
+                        Supervisor Portal
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="mb-4">
+
+    <a
+    href="{% url 'create_log' %}"
+    class="btn btn-success">
+
+        Add New Log
+
+    </a>
+
+    <a
+    href="{% url 'log_list' %}"
+    class="btn btn-primary">
+
+        View My Logs
+
+    </a>
+
+</div>
+
+<div class="alert alert-success shadow">
+
+    <h4>
+
+        Welcome,
+        {{ user.username }}
+
+    </h4>
+
+    <p>
+
+        Manage your SIWES activities,
+        submit daily logs and track
+        supervisor reviews.
+
+    </p>
+
+</div>
+
+
+
+<!-- STATISTICS -->
+
+<div class="container mt-5">
+
+    <div class="row text-center">
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card stats-card">
+
+                <div class="card-body">
+
+                    <h1 class="text-success">
+                        {{ total_students }}
+                    </h1>
+
+                    <h4>Total Students</h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card stats-card">
+
+                <div class="card-body">
+
+                    <h1 class="text-primary">
+                        {{ total_logs }}
+                    </h1>
+
+                    <h4>Logs Submitted</h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card stats-card">
+
+                <div class="card-body">
+
+                    <h1 class="text-success">
+                        {{ approved_logs }}
+                    </h1>
+
+                    <h4>Approved Logs</h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="col-md-3 mb-3">
+
+    <div class="card stats-card">
+
+        <div class="card-body">
+
+            <h1 class="text-warning">
+
+                {{ pending_logs }}
+
+            </h1>
+
+            <h4>Pending Reviews</h4>
+
+            <p>
+                Awaiting supervisor approval
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="col-md-3 mb-3">
+
+    <div class="card stats-card">
+
+        <div class="card-body">
+
+            <h1 class="text-danger">
+                {{ rejected_logs }}
+            </h1>
+
+            <h4>Rejected Logs</h4>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ABOUT -->
+
+<div class="container mt-5">
+
+    <div class="card shadow border-0">
+
+        <div class="card-body p-5">
+
+            <h1 class="fw-bold">
+
+                About The System
+
+            </h1>
+
+            <hr>
+
+            <p>
+
+                <h2>The IT Logbook Management System helps
+                students record daily Industrial Training
+                activities online.</h2>
+
+            </p>
+
+            <p>
+
+                <h2>Supervisors can review submissions,
+                approve logs and provide feedback.</h2>
+
+            </p>
+
+            <p>
+
+                <h2>Institutions can monitor student
+                performance and progress from a
+                centralized dashboard.</h2>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

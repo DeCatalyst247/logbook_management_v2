@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h2>Review Log</h2>
+
+<h3>{{ log.title }}</h3>
+
+<p>{{ log.description }}</p>
+
+{% if log.status == "approved" %}
+
+<span
+class="badge bg-success">
+
+Approved
+
+</span>
+
+{% elif log.status == "rejected" %}
+
+<span
+class="badge bg-danger">
+
+Rejected
+
+</span>
+
+{% else %}
+
+<span
+class="badge bg-warning text-dark">
+
+Pending
+
+</span>
+
+{% endif %}
+
+{% if log.evidence %}
+<a href="{{ log.evidence.url }}">
+View Evidence
+</a>
+{% endif %}
+<form method="POST">
+
+{% csrf_token %}
+
+<label>
+    Supervisor Comment
+</label>
+
+<br>
+
+<textarea
+    name="comment"
+    rows="5"
+    cols="50"
+    placeholder="Enter feedback for the student">
+</textarea>
+
+<br><br>
+
+<button
+    name="action"
+    value="approve"
+    type="submit">
+
+    <h1>Approve</h1>
+
+</button>
+
+<button
+    name="action"
+    value="reject"
+    type="submit">
+
+    <h1>Reject</h1>
+
+</button>
+
+</form>
+
+
+{% endblock %}

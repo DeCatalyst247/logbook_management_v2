@@ -1,0 +1,115 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h2>
+
+{{ log.title }}
+
+</h2>
+
+<hr>
+
+<p>
+
+<strong>Date:</strong>
+
+{{ log.date }}
+
+</p>
+
+<p>
+
+<strong>Description:</strong>
+
+</p>
+
+<p>
+
+{{ log.description }}
+
+</p>
+
+<p>
+
+<strong>Status:</strong>
+
+{% if log.status == "approved" %}
+
+<span class="badge bg-success">
+
+Approved
+
+</span>
+
+{% elif log.status == "rejected" %}
+
+<span class="badge bg-danger">
+
+Rejected
+
+</span>
+
+{% else %}
+
+<span class="badge bg-warning text-dark">
+
+Pending
+
+</span>
+
+{% endif %}
+
+</p>
+
+<p>
+
+<strong>Supervisor Comment:</strong>
+
+</p>
+
+<p>
+
+{{ log.supervisor_comment|default:"No comment yet." }}
+
+</p>
+
+{% if log.evidence %}
+
+<p>
+
+<strong>Evidence:</strong>
+
+<a href="{{ log.evidence.url }}">
+
+View File
+
+</a>
+
+</p>
+
+{% endif %}
+
+<a
+
+href="{% url 'log_list' %}"
+
+class="btn btn-secondary">
+
+Back
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

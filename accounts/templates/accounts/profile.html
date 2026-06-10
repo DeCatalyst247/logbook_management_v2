@@ -1,0 +1,164 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h2 class="mb-4">
+
+                Student Profile
+
+            </h2>
+
+            <hr>
+
+            <h4>
+            <div class="text-center mb-4">
+
+                {% if user.profile.profile_picture %}
+
+                    <img
+            src="{{ user.profile.profile_picture.url }}"
+                width="150"
+                height="150"
+                class="rounded-circle">
+
+                {% else %}
+
+                    <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                width="150"
+                height="150"
+                class="rounded-circle">
+
+                {% endif %}
+
+            </div>
+            <form
+            method="POST"
+            enctype="multipart/form-data">
+
+               {% csrf_token %}
+
+               {{ form.as_p }}
+
+                <button
+                class="btn btn-success"
+                type="submit">
+
+                    Upload Picture
+
+                </button>
+
+            </form>
+
+            <hr>
+                Username:
+                {{ user.username }}
+
+            </h4>
+
+            <h4>
+
+                Email:
+                {{ user.email }}
+
+            </h4>
+
+            <hr>
+
+            <div class="row text-center">
+
+                <div class="col-md-3">
+
+                    <div class="card bg-primary text-white">
+
+                        <div class="card-body">
+
+                            <h1>
+                                {{ total_logs }}
+                            </h1>
+
+                            <h5>
+                                Total Logs
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="card bg-success text-white">
+
+                        <div class="card-body">
+
+                            <h1>
+                                {{ approved_logs }}
+                            </h1>
+
+                            <h5>
+                                Approved
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="card bg-warning">
+
+                        <div class="card-body">
+
+                            <h1>
+                                {{ pending_logs }}
+                            </h1>
+
+                            <h5>
+                                Pending
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="card bg-danger text-white">
+
+                        <div class="card-body">
+
+                            <h1>
+                                {{ rejected_logs }}
+                            </h1>
+
+                            <h5>
+                                Rejected
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
