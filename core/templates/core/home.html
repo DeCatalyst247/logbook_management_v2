@@ -2,83 +2,62 @@
 
 {% block content %}
 
-<!-- HERO SECTION -->
+<!-- HERO SECTION --><section class="hero-section"><div class="container">
 
-<section class="hero-section">
+    <div class="row align-items-center">
 
-    <div class="container">
+        <div class="col-lg-7 text-white">
 
-        <div class="row align-items-center">
+            <span class="badge bg-light text-success p-2 mb-3">
+                Smart • Secure • Efficient
+            </span>
 
-            <div class="col-lg-7 text-white">
+            <h1 class="display-2 fw-bold">
+                IT Logbook <br>
+                Management System
+            </h1>
 
-                <span class="badge bg-light text-success p-2 mb-3">
-                    Smart • Secure • Efficient
-                </span>
+            <p class="lead mt-4">
+                A modern platform for students,
+                supervisors and institutions to
+                manage Industrial Training and
+                SIWES activities digitally.
+            </p>
 
-                <h1 style="
-                font-size:5rem;
-                font-weight:900;
-                line-height:1.1;
-                ">
+            {% if user.is_authenticated %}
+            <div class="mt-4">
 
-                    IT Logbook<br>
-                    Management System
+                <a href="{% url 'log_list' %}"
+                   class="btn btn-light btn-lg px-4 py-3 me-3 fw-bold">
+                    View My Logs
+                </a>
 
-                </h1>
-
-                <p class="lead mt-4">
-
-                    A modern platform for students,
-                    supervisors and institutions to
-                    manage Industrial Training and
-                    SIWES activities digitally.
-
-                </p>
-
-                <div class="mt-4">
-
-                    <a href="{% url 'log_list' %}"
-                    class="btn btn-light btn-lg px-4 py-3 me-3 fw-bold">
-
-                        View My Logs
-
-                    </a>
-
-                    <a href="{% url 'supervisor_dashboard' %}"
-                    class="btn btn-outline-light btn-lg px-4 py-3 fw-bold">
-
-                        Supervisor Portal
-
-                    </a>
-
-                </div>
+                <a href="{% url 'supervisor_dashboard' %}"
+                   class="btn btn-outline-light btn-lg px-4 py-3 fw-bold">
+                    Supervisor Portal
+                </a>
 
             </div>
+            {% endif %}
 
         </div>
 
     </div>
 
-</section>
+</div>
 
+</section>{% if user.is_authenticated %}
 
-<div class="mb-4">
+<div class="container mt-5"><div class="mb-4">
 
-    <a
-    href="{% url 'create_log' %}"
-    class="btn btn-success">
-
+    <a href="{% url 'create_log' %}"
+       class="btn btn-success me-2">
         Add New Log
-
     </a>
 
-    <a
-    href="{% url 'log_list' %}"
-    class="btn btn-primary">
-
+    <a href="{% url 'log_list' %}"
+       class="btn btn-primary">
         View My Logs
-
     </a>
 
 </div>
@@ -86,79 +65,109 @@
 <div class="alert alert-success shadow">
 
     <h4>
-
-        Welcome,
-        {{ user.username }}
-
+        Welcome, {{ user.username }}
     </h4>
 
-    <p>
-
+    <p class="mb-0">
         Manage your SIWES activities,
         submit daily logs and track
         supervisor reviews.
-
     </p>
 
 </div>
 
+</div>
+{% endif %}
 
+<!-- STATISTICS --><div class="container mt-5"><div class="row text-center">
 
-<!-- STATISTICS -->
+    <div class="col-md-3 mb-4">
 
-<div class="container mt-5">
+        <div class="card stats-card h-100">
 
-    <div class="row text-center">
+            <div class="card-body">
 
-        <div class="col-md-3 mb-3">
+                <h1 class="text-success">
+                    {{ total_students }}
+                </h1>
 
-            <div class="card stats-card">
-
-                <div class="card-body">
-
-                    <h1 class="text-success">
-                        {{ total_students }}
-                    </h1>
-
-                    <h4>Total Students</h4>
-
-                </div>
+                <h5>Total Students</h5>
 
             </div>
 
         </div>
 
-        <div class="col-md-3 mb-3">
+    </div>
 
-            <div class="card stats-card">
+    <div class="col-md-3 mb-4">
 
-                <div class="card-body">
+        <div class="card stats-card h-100">
 
-                    <h1 class="text-primary">
-                        {{ total_logs }}
-                    </h1>
+            <div class="card-body">
 
-                    <h4>Logs Submitted</h4>
+                <h1 class="text-primary">
+                    {{ total_logs }}
+                </h1>
 
-                </div>
+                <h5>Logs Submitted</h5>
 
             </div>
 
         </div>
 
-        <div class="col-md-3 mb-3">
+    </div>
 
-            <div class="card stats-card">
+    <div class="col-md-3 mb-4">
 
-                <div class="card-body">
+        <div class="card stats-card h-100">
 
-                    <h1 class="text-success">
-                        {{ approved_logs }}
-                    </h1>
+            <div class="card-body">
 
-                    <h4>Approved Logs</h4>
+                <h1 class="text-success">
+                    {{ approved_logs }}
+                </h1>
 
-                </div>
+                <h5>Approved Logs</h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card stats-card h-100">
+
+            <div class="card-body">
+
+                <h1 class="text-warning">
+                    {{ pending_logs }}
+                </h1>
+
+                <h5>Pending Reviews</h5>
+
+                <small>
+                    Awaiting supervisor approval
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mx-auto mb-4">
+
+        <div class="card stats-card h-100">
+
+            <div class="card-body">
+
+                <h1 class="text-danger">
+                    {{ rejected_logs }}
+                </h1>
+
+                <h5>Rejected Logs</h5>
 
             </div>
 
@@ -167,87 +176,22 @@
     </div>
 
 </div>
-<div class="col-md-3 mb-3">
 
-    <div class="card stats-card">
-
-        <div class="card-body">
-
-            <h1 class="text-warning">
-
-                {{ pending_logs }}
-
-            </h1>
-
-            <h4>Pending Reviews</h4>
-
-            <p>
-                Awaiting supervisor approval
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="col-md-3 mb-3">
-
-    <div class="card stats-card">
-
-        <div class="card-body">
-
-            <h1 class="text-danger">
-                {{ rejected_logs }}
-            </h1>
-
-            <h4>Rejected Logs</h4>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ABOUT -->
 
 <div class="container mt-5">
 
     <div class="card shadow border-0">
 
-        <div class="card-body p-5">
+        <div class="card-body">
 
-            <h1 class="fw-bold">
+            <h3 class="text-center mb-4">
+                Log Status Analytics
+            </h3>
+                <p>Approved:{{ approved_logs }}</p>
+                <p>Pending:{{ pending_logs }}</p>
+                <p>Rejected:{{ rejected_logs }}</p>
 
-                About The System
-
-            </h1>
-
-            <hr>
-
-            <p>
-
-                <h2>The IT Logbook Management System helps
-                students record daily Industrial Training
-                activities online.</h2>
-
-            </p>
-
-            <p>
-
-                <h2>Supervisors can review submissions,
-                approve logs and provide feedback.</h2>
-
-            </p>
-
-            <p>
-
-                <h2>Institutions can monitor student
-                performance and progress from a
-                centralized dashboard.</h2>
-
-            </p>
+            <canvas id="logChart"></canvas>
 
         </div>
 
@@ -255,4 +199,192 @@
 
 </div>
 
+<script>
+window.onload = function() {
+  const ctx =
+document.getElementById("logChart");
+
+new Chart(ctx, {
+
+    type: "bar",
+
+    data: {
+
+        labels: [
+            "Approved",
+            "Pending",
+            "Rejected"
+        ],
+
+        datasets: [{
+
+            label: "Logs",
+
+            
+    
+        
+            backgroundColor: [
+                "green",
+                "orange",
+                "red"
+            ]
+
+        }]
+
+    }
+
+});
+}
+
+</script>
+
+
+
+</div><!-- ABOUT --><div class="container mt-5"><div class="card shadow border-0">
+
+    <div class="card-body p-5">
+
+        <h1 class="fw-bold">
+            About The System
+        </h1>
+
+        <hr>
+
+        <h4>
+            The IT Logbook Management System helps
+            students record daily Industrial Training
+            activities online.
+        </h4>
+
+        <br>
+
+        <h4>
+            Supervisors can review submissions,
+            approve logs and provide feedback.
+        </h4>
+
+        <br>
+
+        <h4>
+            Institutions can monitor student
+            performance and progress from a
+            centralized dashboard.
+        </h4>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+
+        Key Features
+
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h4>
+                        Daily Log Submission
+                    </h4>
+
+                    <p>
+                        Students submit daily
+                        SIWES activities online.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h4>
+                        Supervisor Approval
+                    </h4>
+
+                    <p>
+                        Supervisors review and
+                        approve submitted logs.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h4>
+                        Progress Tracking
+                    </h4>
+
+                    <p>
+                        Institutions monitor
+                        student activities.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+const ctx = document.getElementById('logChart');
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: [
+            'Approved',
+            'Pending',
+            'Rejected'
+        ],
+
+        
+
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false
+
+    }
+
+});
+
+</script>
 {% endblock %}

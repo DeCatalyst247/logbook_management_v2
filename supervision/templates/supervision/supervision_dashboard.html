@@ -21,6 +21,19 @@ placeholder="Search log title">
     placeholder="Search student name">
 
 </form>
+
+
+pending_reviews = LogEntry.objects.filter(
+    status="pending"
+).count()
+
+approved_logs = LogEntry.objects.filter(
+    status="approved"
+).count()
+
+rejected_logs = LogEntry.objects.filter(
+    status="rejected"
+).count()
 <table border="1" cellpadding="10">
 
 <tr>

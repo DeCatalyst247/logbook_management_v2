@@ -33,11 +33,27 @@ def supervisor_dashboard(request):
         logs = logs.filter(
         studentusernameicontains=search
     )
+    pending_reviews = LogEntry.objects.filter(
+    status="pending"
+).count()
 
+    approved_logs = LogEntry.objects.filter(
+    status="approved"
+).count()
+
+    rejected_logs = LogEntry.objects.filter(
+    status="rejected"
+).count()
     return render(
         request,
         "supervision/supervision_dashboard.html",
-        {"logs": logs}
+        {
+            "logs": logs,
+            "pending_reviews":pending_reviews,
+            "approved_logs":approved_logs,
+            "rejected_logs":rejected_logs,
+
+        }
     )
 
 

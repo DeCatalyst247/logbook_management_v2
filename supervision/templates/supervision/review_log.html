@@ -80,6 +80,30 @@ View Evidence
 </button>
 
 </form>
+<div class="card shadow">
 
+    <div class="card-body">
+
+        <h3>{{ log.title }}</h3>
+
+        <hr>
+
+        <p>
+            {{ log.description }}
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            {{ log.date }}
+        </p>
+
+        <p>
+            <strong>Student:</strong>
+            {{ log.student.username }}
+        </p>
+
+    </div>
+
+</div>
 
 {% endblock %}
