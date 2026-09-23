@@ -26,6 +26,8 @@ urlpatterns = [
     path('logbook/', include('logbook.urls')),
     path("supervision/",include("supervision.urls")),
     path("api/", include("api.urls")),
+    path("administration/", include("administration.urls")),
+    
 
 ]
 

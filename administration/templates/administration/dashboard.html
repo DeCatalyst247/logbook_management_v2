@@ -1,0 +1,189 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">
+        Admin Dashboard
+    </h1>
+
+    <div class="row text-center">
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h1 class="text-success">
+                        {{ students }}
+                    </h1>
+
+                    <h5>Total Students</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h1 class="text-primary">
+                        {{ logs }}
+                    </h1>
+
+                    <h5>Total Logs</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h1 class="text-success">
+                        {{ approved }}
+                    </h1>
+
+                    <h5>Approved Logs</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h1 class="text-warning">
+                        {{ pending }}
+                    </h1>
+
+                    <h5>Pending Reviews</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h1 class="text-danger">
+                        {{ rejected }}
+                    </h1>
+
+                    <h5>Rejected Logs</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow mt-4">
+
+        <div class="card-body">
+
+            <h3>
+                Recent Log Activities
+            </h3>
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+                        <th>Title</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for log in recent_logs %}
+
+                    <tr>
+
+                        <td>
+                            {{ log.student.username }}
+                        </td>
+
+                        <td>
+                            {{ log.title }}
+                        </td>
+
+                        <td>
+
+                            {% if log.status == "approved" %}
+
+                            <span class="badge bg-success">
+                                Approved
+                            </span>
+
+                            {% elif log.status == "rejected" %}
+
+                            <span class="badge bg-danger">
+                                Rejected
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-warning text-dark">
+                                Pending
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="3">
+                            No logs found.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

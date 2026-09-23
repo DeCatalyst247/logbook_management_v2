@@ -81,47 +81,6 @@ IT_LOGBOOK_SYSTEM/
 └── requirements.txt
 
 ---
-
-Installation
-
-Clone Repository
-
-git clone https://github.com/yourusername/it-logbook-system.git
-
-Create Virtual Environment
-
-python -m venv venv
-
-Activate Environment
-
-Windows:
-
-venv\Scripts\activate
-
-Linux/Mac:
-
-source venv/bin/activate
-
-Install Dependencies
-
-pip install -r requirements.txt
-
-Run Migrations
-
-python manage.py makemigrations
-
-python manage.py migrate
-
-Create Superuser
-
-python manage.py createsuperuser
-
-Run Server
-
-python manage.py runserver
-
----
-
 Future Improvements
 
 - Email Notifications
@@ -135,7 +94,7 @@ Future Improvements
 
 Author
 
-Catalyst
+ Avoseh Rasaq (Catalyst)
 
 Electronics and Computer Engineering Student
 

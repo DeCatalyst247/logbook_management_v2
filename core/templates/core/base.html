@@ -164,7 +164,15 @@
                     Supervisor
                 </a>
             </li>
-
+            {% if user.is_superuser %}
+             <li class="nav-item">
+                <a
+                    class="nav-link"
+                    href="{% url 'admin_dashboard' %}">
+                    Admin
+                </a>
+            </li>
+            {% endif %}
             {% if user.profile.profile_picture %}
             <li class="nav-item d-flex align-items-center ms-2">
                 <img
@@ -257,8 +265,7 @@
 </footer>
 
 <script
-src="https://cdnjs.cloudflare.com/ajax/libs
-/Chart.js/4.4.1/chart.umd.min.js">
+src="https://cdn.jsdelivr.net/npm/chart.js">
 </script>
 
 </body>

@@ -178,20 +178,67 @@
 </div>
 
 
+
+
+
+
+
+
 <div class="container mt-5">
 
     <div class="card shadow border-0">
 
         <div class="card-body">
 
-            <h3 class="text-center mb-4">
-                Log Status Analytics
+            <h3 class="mb-4">
+                Recent Activities
             </h3>
-                <p>Approved:{{ approved_logs }}</p>
-                <p>Pending:{{ pending_logs }}</p>
-                <p>Rejected:{{ rejected_logs }}</p>
 
-            <canvas id="logChart"></canvas>
+            {% for log in recent_logs %}
+
+                <div class="border-bottom pb-2 mb-2">
+
+                    <strong>
+                        {{ log.student.username }}
+                    </strong>
+
+                    submitted
+
+                    <strong>
+                        {{ log.title }}
+                    </strong>
+
+                    -
+
+                    {% if log.status == "approved" %}
+
+                        <span class="badge bg-success">
+                            Approved
+                        </span>
+
+                    {% elif log.status == "rejected" %}
+
+                        <span class="badge bg-danger">
+                            Rejected
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-warning text-dark">
+                            Pending
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            {% empty %}
+
+                <p>
+                    No activities yet.
+                </p>
+
+            {% endfor %}
 
         </div>
 
@@ -199,44 +246,7 @@
 
 </div>
 
-<script>
-window.onload = function() {
-  const ctx =
-document.getElementById("logChart");
 
-new Chart(ctx, {
-
-    type: "bar",
-
-    data: {
-
-        labels: [
-            "Approved",
-            "Pending",
-            "Rejected"
-        ],
-
-        datasets: [{
-
-            label: "Logs",
-
-            
-    
-        
-            backgroundColor: [
-                "green",
-                "orange",
-                "red"
-            ]
-
-        }]
-
-    }
-
-});
-}
-
-</script>
 
 
 
@@ -355,36 +365,93 @@ new Chart(ctx, {
     </div>
 
 </div>
+
+
+
+<
+
+
+
 <script>
+div class="container mt-5">
 
-const ctx = document.getElementById('logChart');
+    <div class="card shadow border-0">
 
-new Chart(ctx, {
+        <div class="card-body">
 
-    type: 'bar',
+            <h3 class="text-center mb-4">
+                Log Status Analytics
+            </h3>
+             <div style="height: 200px;">
+                <canvas id="logChart"></canvas>
 
-    data: {
-
-        labels: [
-            'Approved',
-            'Pending',
-            'Rejected'
-        ],
-
-        
+                
+             </div> 
 
 
-    },
+        </div>
 
-    options: {
+    </div>
 
-        responsive: true,
+</div>
 
-        maintainAspectRatio: false
+window.onload = function() {
 
-    }
+    const ctx = document.getElementById("logChart");
 
-});
+    new Chart(ctx, {
+
+        type: "bar",
+
+        data: {
+
+            labels: [
+                "Approved",
+                "Pending",
+                "Rejected"
+            ],
+
+            datasets: [{
+
+                label: "Number of Logs",
+
+                data: [
+                    {{ approved_logs }},
+                    {{ pending_logs }},
+                    {{ rejected_logs }}
+                ],
+
+                backgroundColor: [
+                    "green",
+                    "orange",
+                    "red"
+                ],
+
+                borderWidth: 1
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            scales: {
+
+                y: {
+                    beginAtZero: true
+                }
+
+            }
+
+        }
+
+    });
+
+};
 
 </script>
 {% endblock %}

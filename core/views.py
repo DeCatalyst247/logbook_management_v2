@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     total_students = User.objects.count()
     total_logs = LogEntry.objects.count()
+    recent_logs = LogEntry.objects.order_by(
+        "created_at"
+    )[:5]
+
     approved_logs = LogEntry.objects.filter(
         status = "approved"
     ).count()
@@ -17,12 +21,14 @@ def home(request):
     rejected_logs = LogEntry.objects.filter(
     status="rejected"
     ).count()
+    
     context = {
         "total_students": total_students,
         "total_logs": total_logs,
         "approved_logs": approved_logs,
         "pending_logs" : pending_logs,
         "rejected_logs" : rejected_logs,
+        "recent_logs"   : recent_logs,
 
     }
 
